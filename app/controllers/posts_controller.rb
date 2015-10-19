@@ -4,6 +4,7 @@ class PostsController < ApplicationController
   # GET /posts
   def index
     @posts = Post.all
+    @comment = Comment.new
   end
 
   # GET /posts/1
@@ -59,4 +60,5 @@ class PostsController < ApplicationController
     def post_params
       params.require(:post).permit(:title, :content)
     end
+
 end

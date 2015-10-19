@@ -6,7 +6,7 @@ describe User do
 
   it 'saves a User' do
     user = FactoryGirl.create(:user)
-    user.email.should eq "user1@example.com"
+    user.email.should eq "user@example.com"
   end
 
   # it do
