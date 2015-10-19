@@ -7,9 +7,21 @@
   <%= csrf_meta_tags %>
 </head>
 <body>
+  <div class="ui secondary pointing teal inverted menu">
+  <%= link_to "Home", root_path, class:"item" %>
+  <div class="right menu">
+    <% if current_user.nil? %>
+      <%= link_to "Login", login_path, class:"item" %>
+      <%= link_to "Sign Up", signup_path, class:"item" %>
+    <% else %>
+      <div class="item">Logged in as <%= current_user.username %></div>
+      <%= link_to "Logout", logout_path, class:"item" %>
+    <% end %>
+  </div>
+</div>
 
-<%= notice %>
-<%= yield %>
-
+<div class="main-container ui container">
+  <%= yield %>
+</div>
 </body>
 </html>

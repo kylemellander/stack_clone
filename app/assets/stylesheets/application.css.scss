@@ -11,5 +11,17 @@
  * file per style scope.
  *
  *= require_tree .
+ *= require semantic_ui/semantic_ui
  *= require_self
  */
+
+ul.login-menu li {
+  list-style: none;
+  display:inline-block;
+}
+ul.login-menu {
+  float:right;
+}
+.main-container {
+  clear:both;
+}

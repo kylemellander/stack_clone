@@ -1,10 +1,10 @@
 class User < ActiveRecord::Base
   validates :email, uniqueness: true
+  has_many :posts
 
   include BCrypt
 
   has_secure_password
-
 
   def password
     @password ||= Password.new(password_digest)

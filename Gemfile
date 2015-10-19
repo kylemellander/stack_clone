@@ -9,7 +9,9 @@ gem 'jquery-rails'
 gem 'turbolinks'
 gem 'hirb'
 gem 'bcrypt'
-
+gem 'less-rails-semantic_ui'
+gem 'autoprefixer-rails'
+gem 'therubyracer'
 
 group :development do
   gem 'byebug'

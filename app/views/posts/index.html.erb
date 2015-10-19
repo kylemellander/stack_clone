@@ -1,0 +1,32 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Listing Posts</h1>
+
+<table class="ui table">
+  <thead>
+    <tr>
+      <th>Title</th>
+      <th>User</th>
+      <th>Posted</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @posts.each do |post| %>
+      <tr>
+        <td class="twelve wide"><%= link_to post.title, post %></td>
+        <td><%= post.user.username %></td>
+        <td><%= distance_of_time_in_words_to_now(post.created_at) %> ago</td>
+        <% if !current_user.nil? && post.user_id == current_user.id %>
+          <td class="right aligned"><%= link_to 'Edit', edit_post_path(post) %> <%= link_to 'Destroy', post, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <% end %>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+<% if !current_user.nil? %>
+  <%= link_to 'New Post', new_post_path %>
+<% end %>
