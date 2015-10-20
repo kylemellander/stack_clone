@@ -15,6 +15,7 @@ gem 'autoprefixer-rails'
 gem 'therubyracer'
 
 group :development do
+  gem 'letter_opener'
   gem 'byebug'
   gem 'web-console'
   gem 'spring'

@@ -28,7 +28,7 @@
                   <div class="metadata">
                     <span class="date"><%= distance_of_time_in_words_to_now(comment.created_at) %> ago</span>
                   </div>
-                  <% if comment.user.id == current_user.id %>
+                  <% if !current_user.nil? && comment.user.id == current_user.id %>
                     <div class="actions">
                       <%= link_to "edit", edit_post_comment_path(post, comment)%>
                     </div>
@@ -39,15 +39,29 @@
           <% else %>
             <h3 class="ui dividing header teal">No comments yet.</h3>
           <% end %>
-          <h3 class="ui dividing header teal">Add a comment</h3>
-
-          <%= form_for [post, @comment], html: {class: "ui form"} do |f| %>
-            <div class="field">
-              <%= f.label :comment %><br>
-              <%= f.text_area :comment %>
-            </div>
-            <%= f.hidden_field :post_id, options = {value:post.id}%>
-            <%= f.submit class:"ui button teal" %>
+          <% if current_user.nil?%>
+            <h3 class="ui dividing header teal">Sign in to add a comment</h3>
+            <%= form_tag sessions_path, class: "ui form" do %>
+              <div class="field">
+                <%= label_tag :email %><br />
+                <%= text_field_tag :email, params[:email] %>
+              </div>
+              <div class="field">
+                <%= label_tag :password %><br />
+                <%= password_field_tag :password %>
+              </div>
+              <div class="actions"><%= submit_tag "Log In" %></div>
+            <% end %>
+          <% else %>
+            <h3 class="ui dividing header teal">Add a comment</h3>
+            <%= form_for [post, @comment], html: {class: "ui form"} do |f| %>
+              <div class="field">
+                <%= f.label :comment %><br>
+                <%= f.text_area :comment %>
+              </div>
+              <%= f.hidden_field :post_id, options = {value:post.id}%>
+              <%= f.submit class:"ui button teal" %>
+            <% end %>
           <% end %>
         </div>
       </div>

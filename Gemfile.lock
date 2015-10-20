@@ -88,6 +88,8 @@ GEM
       tilt
     less-rails-semantic_ui (2.1.4.0)
       less-rails (>= 2.6.0, <= 2.7.0)
+    letter_opener (1.4.1)
+      launchy (~> 2.2)
     libv8 (3.16.14.13)
     loofah (2.0.3)
       nokogiri (>= 1.5.9)
@@ -207,6 +209,7 @@ DEPENDENCIES
   jquery-turbolinks
   launchy
   less-rails-semantic_ui
+  letter_opener
   pg
   pry
   quiet_assets
