@@ -4,39 +4,49 @@
 
 <div class="ui accordion">
   <% @posts.each do |post| %>
-  <div class="title ui header">
-    <i class="dropdown icon"></i>
-    <%= post.title %>
-  </div>
-  <div class="content ui segment">
-    <div class="transition hidden">
-      <div class="ui red ribbon label"><%= distance_of_time_in_words_to_now(post.created_at) %> ago by <%= post.user.username %></div>
-      <br>
-      <br>
-      <div class="content"><%= simple_format(post.content) %></div>
+    <div class="title ui header">
+      <i class="dropdown icon"></i>
+      <%= post.title %>
+    </div>
+    <div class="content ui segment">
+      <div class="transition hidden">
+        <div class="ui grey ribbon label"><%= distance_of_time_in_words_to_now(post.created_at) %> ago by <%= post.user.username %></div>
+        <br>
+        <br>
+        <div class="content large"><%= simple_format(post.content) %></div>
 
-      <div class="segment comments">
-        <% if post.comments.any? %>
-          <% post.comments.each do |comment| %>
-            <%= comment.comment %>
+        <div class="ui comments">
+          <% if post.comments.any? %>
+            <h3 class="ui dividing header red">Answers</h3>
+            <% post.comments.each do |comment| %>
+              <div class="comment">
+                <div class="content">
+                  <div class="text">
+                    <%= comment.comment %>
+                  </div>
+                  <a class="author">by <%= comment.user.username %></a>
+                  <div class="metadata">
+                    <span class="date"><%= distance_of_time_in_words_to_now(comment.created_at) %> ago</span>
+                  </div>
+                </div>
+              </div>
+            <% end %>
+          <% else %>
+            <h3 class="ui dividing header red">No comments yet.</h3>
           <% end %>
-        <% else %>
-          No comments yet.
-        <% end %>
+          <h3 class="ui dividing header red">Add a comment</h3>
 
-        <h3 class="ui header">Add a comment</h3>
-
-        <%= form_for [post, @comment], html: {class: "ui form"} do |f| %>
-          <div class="field">
-            <%= f.label :comment %><br>
-            <%= f.text_area :comment %>
-          </div>
-          <%= f.hidden_field :post_id, options = {value:post.id}%>
-          <%= f.submit %>
-        <% end %>
+          <%= form_for [post, @comment], html: {class: "ui form"} do |f| %>
+            <div class="field">
+              <%= f.label :comment %><br>
+              <%= f.text_area :comment %>
+            </div>
+            <%= f.hidden_field :post_id, options = {value:post.id}%>
+            <%= f.submit class:"ui button teal" %>
+          <% end %>
+        </div>
       </div>
     </div>
-  </div>
   <% end %>
 </div>
 
