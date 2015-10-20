@@ -29,6 +29,7 @@ class PostsController < ApplicationController
     @post = Post.new(post_params)
     @post.user_id = current_user.id
     if @post.save
+      UserMailer.posted_thank_you(@post.user).deliver
       redirect_to posts_path, notice: 'Post was successfully created.'
     else
       render :new

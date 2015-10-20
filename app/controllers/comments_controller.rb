@@ -4,6 +4,7 @@ class CommentsController < ApplicationController
     @comment = Comment.new(comment_params)
     @comment.user_id = current_user.id
     if @comment.save
+      UserMailer.answer_alert(@comment.post, @comment).deliver
       redirect_to posts_path, notice: 'Comment was successfully created.'
     else
       render :new

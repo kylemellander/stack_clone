@@ -1,0 +1,5 @@
+<h1>You've recieved a reply to the question: <%= @post.title %></h1>
+
+<p>
+  <%= @comment.comment %>
+</p>
