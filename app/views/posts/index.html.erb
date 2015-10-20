@@ -17,7 +17,7 @@
 
         <div class="ui comments">
           <% if post.comments.any? %>
-            <h3 class="ui dividing header red">Answers</h3>
+            <h3 class="ui dividing header teal">Answers</h3>
             <% post.comments.each do |comment| %>
               <div class="comment">
                 <div class="content">
@@ -28,13 +28,18 @@
                   <div class="metadata">
                     <span class="date"><%= distance_of_time_in_words_to_now(comment.created_at) %> ago</span>
                   </div>
+                  <% if comment.user.id == current_user.id %>
+                    <div class="actions">
+                      <%= link_to "edit", edit_post_comment_path(post, comment)%>
+                    </div>
+                  <% end %>
                 </div>
               </div>
             <% end %>
           <% else %>
-            <h3 class="ui dividing header red">No comments yet.</h3>
+            <h3 class="ui dividing header teal">No comments yet.</h3>
           <% end %>
-          <h3 class="ui dividing header red">Add a comment</h3>
+          <h3 class="ui dividing header teal">Add a comment</h3>
 
           <%= form_for [post, @comment], html: {class: "ui form"} do |f| %>
             <div class="field">
